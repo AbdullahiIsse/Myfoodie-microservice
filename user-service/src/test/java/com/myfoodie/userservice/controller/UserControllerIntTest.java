@@ -1,4 +1,4 @@
-package com.myfoodie.userservice;
+package com.myfoodie.userservice.controller;
 
 
 import com.myfoodie.userservice.dto.UserRequest;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class UserServiceApplicationTests {
+class UserControllerIntTest {
 
     @Container
     @ServiceConnection
