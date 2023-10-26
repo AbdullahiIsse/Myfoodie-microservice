@@ -13,6 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "dish")
 @Data
@@ -32,40 +33,41 @@ public class Dish {
     private String name;
 
     @NotBlank(message = "Description is required")
-    @Column(name = "Description", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
     @NotBlank(message = "Recipe is required")
-    @Column(name = "Recipe", nullable = false)
+    @Column(name = "recipe", nullable = false)
     private String recipe;
 
     @NotBlank(message = "ImageURL is required")
     @Size(max = 255, message = "ImageURL cannot exceed 255 characters")
-    @Column(name = "ImageURL", nullable = false)
+    @Column(name = "image_url", nullable = false)
     private String imageURL;
 
     @NotNull(message = "TimeEstimate is required")
     @Min(value = 1, message = "TimeEstimate must be greater than 0")
-    @Column(name = "TimeEstimate", nullable = false)
+    @Column(name = "time_estimate", nullable = false)
     private Integer timeEstimate;
 
     @NotNull(message = "MealType is required")
     @Enumerated(EnumType.STRING)
-    @Column(name = "MealType", nullable = false)
+    @Column(name = "meal_type", nullable = false)
     private MealType mealType;
 
-    @Column(name = "NutritionalContent", columnDefinition = "json")
-    private String nutritionalContent;
+
+    @Column(name = "nutritional_content")
+    private List<String> nutritionalContent;
 
     @NotNull(message = "CreatedAt is required")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CreatedAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "UpdatedAt")
+    @Column(name = "updated_at", nullable = true)
     private Date updatedAt;
 
 }

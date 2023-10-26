@@ -26,7 +26,15 @@ public class DishServiceImpl implements DishService {
     @Override
     @Transactional
     public void addDish(@Valid DishRequest dishRequest) {
-        Dish dish = Dish.builder().name(dishRequest.getName()).description(dishRequest.getDescription()).recipe(dishRequest.getRecipe()).imageURL(dishRequest.getImageURL()).timeEstimate(dishRequest.getTimeEstimate()).mealType(dishRequest.getMealType()).nutritionalContent(dishRequest.getNutritionalContent()).createdAt(dishRequest.getCreatedAt()).build();
+        Dish dish = Dish.builder()
+                .name(dishRequest.getName())
+                .description(dishRequest.getDescription())
+                .recipe(dishRequest.getRecipe())
+                .imageURL(dishRequest.getImageURL())
+                .timeEstimate(dishRequest.getTimeEstimate())
+                .mealType(dishRequest.getMealType())
+                .nutritionalContent(dishRequest.getNutritionalContent())
+                .createdAt(dishRequest.getCreatedAt()).build();
 
         dishRepository.save(dish);
 
@@ -92,19 +100,21 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public List<DishResponse> getAllDishesFromType(String type) {
+        String lowerCaseType = type.toLowerCase();
         List<Dish> dishList = dishRepository.findAll();
         return dishList.stream()
                 .map(this::mapToDishResponse)
-                .filter(dishResponse -> dishResponse.getMealType().getDisplayName().equals(type))
+                .filter(dishResponse -> dishResponse.getMealType().name().toLowerCase().equals(lowerCaseType))
                 .toList();
     }
 
     @Override
     public List<DishResponse> searchDishesByName(String name) {
+        String lowerCaseName = name.toLowerCase();
         List<Dish> dishList = dishRepository.findAll();
         return dishList.stream()
                 .map(this::mapToDishResponse)
-                .filter(dishResponse -> dishResponse.getName().contains(name))
+                .filter(dishResponse -> dishResponse.getName().toLowerCase().contains(lowerCaseName))
                 .toList();
     }
 

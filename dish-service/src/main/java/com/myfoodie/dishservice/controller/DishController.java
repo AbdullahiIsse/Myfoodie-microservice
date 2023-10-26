@@ -29,7 +29,7 @@ public class DishController {
         dishService.addDish(dishRequest);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDish(@PathVariable Long id, @RequestBody DishRequest dishRequest) throws DishNotFoundException {
         dishService.updateDishById(id, dishRequest);

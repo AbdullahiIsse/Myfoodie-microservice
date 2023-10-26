@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,6 +20,6 @@ public class DishRequest {
     private String imageURL;
     private Integer timeEstimate;
     private MealType mealType;
-    private String nutritionalContent;
+    private List<String> nutritionalContent;
     private Date createdAt;
 }
