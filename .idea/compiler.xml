@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
+        <module name="favorite-dish-service" />
         <module name="user-service" />
         <module name="discovery-server" />
         <module name="dish-service" />
@@ -19,6 +20,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="dish-service" options="-parameters" />
+      <module name="favorite-dish-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
