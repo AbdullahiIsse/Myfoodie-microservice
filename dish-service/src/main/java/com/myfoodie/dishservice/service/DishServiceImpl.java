@@ -29,6 +29,7 @@ public class DishServiceImpl implements DishService {
         Dish dish = Dish.builder()
                 .name(dishRequest.getName())
                 .description(dishRequest.getDescription())
+                .ingredients(dishRequest.getIngredients())
                 .recipe(dishRequest.getRecipe())
                 .imageURL(dishRequest.getImageURL())
                 .timeEstimate(dishRequest.getTimeEstimate())
@@ -59,6 +60,10 @@ public class DishServiceImpl implements DishService {
 
             if (dishRequest.getDescription() != null) {
                 dish.setDescription(dishRequest.getDescription());
+            }
+
+            if (dishRequest.getIngredients() != null) {
+                dish.setIngredients(dishRequest.getIngredients());
             }
 
             if (dishRequest.getRecipe() != null) {
@@ -131,7 +136,14 @@ public class DishServiceImpl implements DishService {
     }
 
     private DishResponse mapToDishResponse(Dish dish) {
-        return DishResponse.builder().name(dish.getName()).description(dish.getDescription()).recipe(dish.getRecipe()).imageURL(dish.getImageURL()).timeEstimate(dish.getTimeEstimate()).mealType(dish.getMealType()).nutritionalContent(dish.getNutritionalContent()).build();
+        return DishResponse.builder()
+                .name(dish.getName())
+                .description(dish.getDescription())
+                .ingredients(dish.getIngredients())
+                .recipe(dish.getRecipe())
+                .imageURL(dish.getImageURL()).timeEstimate(dish.getTimeEstimate())
+                .mealType(dish.getMealType())
+                .nutritionalContent(dish.getNutritionalContent()).build();
 
     }
 }

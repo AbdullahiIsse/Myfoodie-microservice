@@ -16,6 +16,7 @@ import java.util.List;
 public class DishResponse {
     private String name;
     private String description;
+    private List<String> ingredients;
     private String recipe;
     private String imageURL;
     private Integer timeEstimate;

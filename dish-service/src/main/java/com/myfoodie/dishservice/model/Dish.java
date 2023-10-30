@@ -36,6 +36,10 @@ public class Dish {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @NotNull(message = "ingredients is required")
+    @Column(name = "ingredients")
+    private List<String> ingredients;
+
     @NotBlank(message = "Recipe is required")
     @Column(name = "recipe", nullable = false)
     private String recipe;
