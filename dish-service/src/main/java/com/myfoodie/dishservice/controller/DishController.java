@@ -41,10 +41,10 @@ public class DishController {
         dishService.removeDishById(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     @ResponseStatus(HttpStatus.OK)
-    public DishResponse getDish(@PathVariable Long id) throws DishNotFoundException {
-        return dishService.getDishById(id);
+    public List<DishResponse> getDishByIds(@RequestParam List<Long> id) throws DishNotFoundException {
+        return dishService.getDishByIds(id);
     }
 
     @GetMapping("/type/{type}")

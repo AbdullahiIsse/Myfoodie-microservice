@@ -10,5 +10,7 @@ public interface DishRepository extends CrudRepository<Dish,Long> {
     @Override
     List<Dish>findAll();
 
+    List<Dish> findDishByIdIn(List<Long> id);
+
     Dish findDishById(long id);
 }

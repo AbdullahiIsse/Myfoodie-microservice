@@ -19,5 +19,5 @@ public interface DishService {
 
     List<DishResponse>searchDishesByName(String name);
 
-    DishResponse getDishById(Long dishId);
+   List<DishResponse> getDishByIds(List<Long> dishId);
 }

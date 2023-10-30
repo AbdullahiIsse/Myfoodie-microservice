@@ -124,15 +124,10 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishResponse getDishById(Long dishId) {
-        Dish dish = dishRepository.findDishById(dishId);
-
-        if (dish != null) {
-            return mapToDishResponse(dish);
-        } else {
-            log.error("Dish with id {} not found", dishId);
-            throw new DishNotFoundException("Dish not found with id " + dishId);
-        }
+    public  List<DishResponse> getDishByIds(List<Long> dishId) {
+       return dishRepository.findDishByIdIn(dishId).stream()
+                .map(this::mapToDishResponse)
+                .toList();
     }
 
     private DishResponse mapToDishResponse(Dish dish) {
