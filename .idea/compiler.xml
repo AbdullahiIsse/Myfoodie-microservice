@@ -11,6 +11,7 @@
         <module name="favorite-dish-service" />
         <module name="user-service" />
         <module name="discovery-server" />
+        <module name="review-service" />
         <module name="dish-service" />
       </profile>
     </annotationProcessing>
@@ -21,6 +22,7 @@
       <module name="discovery-server" options="-parameters" />
       <module name="dish-service" options="-parameters" />
       <module name="favorite-dish-service" options="-parameters" />
+      <module name="review-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

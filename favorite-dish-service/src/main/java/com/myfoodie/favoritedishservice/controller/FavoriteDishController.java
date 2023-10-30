@@ -59,7 +59,7 @@ public class FavoriteDishController {
         return favoriteDishService.getFavoriteDishesAddedBetweenDates(id, StartDate, EndDate);
     }
 
-    @DeleteMapping("/{userId}}")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeAllDishFromUser(@PathVariable String userId) {
         favoriteDishService.removeAllFavoriteDishesForUser(userId);
