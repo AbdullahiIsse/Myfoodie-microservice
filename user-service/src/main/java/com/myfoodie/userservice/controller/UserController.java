@@ -23,6 +23,12 @@ public class UserController {
         userService.createUser(userRequest);
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserById(@PathVariable("id") String id) {
+        return userService.getUserById(id);
+    }
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

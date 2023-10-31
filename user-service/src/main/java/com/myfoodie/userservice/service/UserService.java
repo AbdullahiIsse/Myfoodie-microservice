@@ -10,6 +10,8 @@ public interface UserService {
 
     void createUser( @Valid UserRequest userRequeste);
 
+    UserResponse getUserById(String id);
+
     List<UserResponse> getAllUsers();
 
 

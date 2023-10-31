@@ -32,6 +32,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public UserResponse getUserById(String id) {
+        var user = userRepository.findUserById(id);
+        return UserResponse
+                .builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .lastSeen(user.getLastSeen())
+                .build();
+    }
+
+
+    @Override
     public List<UserResponse> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream().map(this::mapToUserResponse).toList();
