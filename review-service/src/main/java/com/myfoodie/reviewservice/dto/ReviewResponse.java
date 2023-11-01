@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewResponse {
+    private long id;
     private String userId;
     private long dishId;
     private double rating;

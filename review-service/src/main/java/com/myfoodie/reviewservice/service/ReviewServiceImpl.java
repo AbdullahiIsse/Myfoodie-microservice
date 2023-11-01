@@ -119,6 +119,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private ReviewResponse mapToReviewResponse(Review review){
         return ReviewResponse.builder()
+                .id(review.getId())
                 .userId(review.getUserId())
                 .dishId(review.getDishId())
                 .rating(review.getRating())
