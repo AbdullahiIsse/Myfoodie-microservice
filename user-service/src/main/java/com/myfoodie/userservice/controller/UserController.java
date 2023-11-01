@@ -36,6 +36,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/other/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponse> getAllTheOtherUsers(@PathVariable String id) {
+        return userService.getAllOtherUsers(id);
+    }
+
 
     @GetMapping("/exist/{userId}")
     @ResponseStatus(HttpStatus.OK)

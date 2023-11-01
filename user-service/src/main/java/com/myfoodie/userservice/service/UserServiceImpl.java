@@ -51,6 +51,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<UserResponse> getAllOtherUsers(String userId) {
+        List<User> users = userRepository.getAllOtherUsers(userId);
+        return users.stream().map(this::mapToUserResponse).toList();
+    }
+
+    @Override
     public boolean checkIfUserExists(String userId) {
         return userRepository.existsUserById(userId);
     }
