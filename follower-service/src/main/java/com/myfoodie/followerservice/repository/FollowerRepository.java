@@ -10,6 +10,7 @@ public interface FollowerRepository extends CrudRepository<Follower,Long> {
     List<Follower> findAllByFollowerId(String followerID);
     void deleteByFollowerIdAndUserId(String followerId,String userId);
 
+    boolean existsByFollowerIdAndUserId (String followerId,String userId);
 
 
 

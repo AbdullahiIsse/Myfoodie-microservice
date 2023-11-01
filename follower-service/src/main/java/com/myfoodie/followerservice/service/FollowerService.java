@@ -2,7 +2,6 @@ package com.myfoodie.followerservice.service;
 
 import com.myfoodie.followerservice.dto.FollowerRequest;
 import com.myfoodie.followerservice.dto.FollowerResponse;
-import com.myfoodie.followerservice.model.Follower;
 import jakarta.validation.Valid;
 
 import java.util.List;
