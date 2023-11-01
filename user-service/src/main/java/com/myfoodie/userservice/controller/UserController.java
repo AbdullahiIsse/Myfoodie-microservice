@@ -35,4 +35,11 @@ public class UserController {
     public List<UserResponse> getAllUser() {
         return userService.getAllUsers();
     }
+
+
+    @GetMapping("/exist/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean checkIfUserExists(@PathVariable("userId") String userId) {
+        return userService.checkIfUserExists(userId);
+    }
 }

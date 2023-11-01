@@ -50,6 +50,10 @@ public class UserServiceImpl implements UserService{
         return users.stream().map(this::mapToUserResponse).toList();
     }
 
+    @Override
+    public boolean checkIfUserExists(String userId) {
+        return userRepository.existsUserById(userId);
+    }
 
 
     private UserResponse mapToUserResponse(User user){

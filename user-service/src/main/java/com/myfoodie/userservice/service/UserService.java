@@ -14,5 +14,7 @@ public interface UserService {
 
     List<UserResponse> getAllUsers();
 
+    boolean checkIfUserExists (String userId);
+
 
 }
