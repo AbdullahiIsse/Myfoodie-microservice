@@ -3,16 +3,15 @@ package com.myfoodie.reviewservice.service;
 import com.myfoodie.reviewservice.dto.ReviewDishResponse;
 import com.myfoodie.reviewservice.dto.ReviewRequest;
 import com.myfoodie.reviewservice.dto.ReviewResponse;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface ReviewService {
 
-    void createReview(ReviewRequest reviewRequest);
-    void updateReview(long reviewId, ReviewRequest reviewRequest);
-    void deleteReview(long reviewId);
-
-    ReviewResponse getReviewById(long reviewId);
+    void createReview(@Valid ReviewRequest reviewRequest);
+    void updateReview(String userId,long reviewId,@Valid  ReviewRequest reviewRequest);
+    void deleteReview(long reviewId,String userId);
 
     List<ReviewResponse> getReviewsByDish(long dishId);
 
@@ -20,12 +19,9 @@ public interface ReviewService {
 
     double getAverageRatingForDish(long dishId);
 
-    List<ReviewResponse> getLatestReviews(int count);
+    List<ReviewResponse> getLatestReviewsByDishId(long dishId);
 
 
-    List<ReviewDishResponse> getTopRatedDishes(int count);
-
-    boolean hasUserReviewedDish(String userId, long dishId);
 
 
 }
