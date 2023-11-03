@@ -59,5 +59,11 @@ public class DishController {
         return dishService.searchDishesByName(name);
     }
 
+    @GetMapping("/dish/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public DishResponse getDishesById(@PathVariable long id) {
+        return dishService.getDishById(id);
+    }
+
 
 }

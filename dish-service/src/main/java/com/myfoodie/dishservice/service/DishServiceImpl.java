@@ -130,6 +130,11 @@ public class DishServiceImpl implements DishService {
                 .toList();
     }
 
+    public DishResponse getDishById (long dishId){
+        var dish = dishRepository.findDishById(dishId);
+        return mapToDishResponse(dish);
+    }
+
     private DishResponse mapToDishResponse(Dish dish) {
         return DishResponse.builder()
                 .name(dish.getName())
