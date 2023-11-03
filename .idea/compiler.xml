@@ -13,6 +13,7 @@
         <module name="dish-service" />
         <module name="api-gateway" />
         <module name="calendar-service" />
+        <module name="grocery-stores-service" />
         <module name="user-service" />
         <module name="follower-service" />
       </profile>
@@ -26,6 +27,7 @@
       <module name="dish-service" options="-parameters" />
       <module name="favorite-dish-service" options="-parameters" />
       <module name="follower-service" options="-parameters" />
+      <module name="grocery-stores-service" options="-parameters" />
       <module name="review-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
