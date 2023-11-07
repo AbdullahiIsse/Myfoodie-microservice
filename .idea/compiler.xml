@@ -18,6 +18,9 @@
         <module name="follower-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fdgfdfg" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
