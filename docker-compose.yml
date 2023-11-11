@@ -1,0 +1,187 @@
+version: '3.1'
+
+services:
+
+  ## Keycloak Config with postgresql database
+  keycloak-postgresql:
+    container_name: keycloak-postgresql
+    image: postgres
+    volumes:
+      - ./postgresql_keycloak_data:/data/postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 42323087
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:22.0.5
+    command: [ "start-dev", "--import-realm" ]
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak-postgresql
+      DB_DATABASE: keycloak
+      DB_USER: postgres
+      DB_PASSWORD: 42323087
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8181:8080"
+    volumes:
+      - ./realms/:/opt/keycloak/data/import/
+    depends_on:
+      - keycloak-postgresql
+
+  ## Zipkin
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+      ## Eureka Server
+  discovery-server:
+    image: abdullahiisse/discovery-server:latest
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+
+    environment:
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+
+  ## Api-gateway
+  api-gateway:
+   image: abdullahiisse/api-gateway:latest
+   container_name: api-gateway
+   pull_policy: always
+   ports:
+     - "8080:8080"
+   expose:
+     - "8080"
+   environment:
+     - spring.security.oauth2.resourceserver.jwt.issuer-uri=https://keycloak:8181/realms/spring-boot-myfoodie-microservice-realm
+     - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://keycloak:8181/realms/spring-boot-myfoodie-microservice-realm/protocol/openid-connect/certs
+     - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+     - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+
+   depends_on:
+     - zipkin
+     - discovery-server
+     - keycloak
+
+
+  user-service:
+    container_name: user-service
+    image: abdullahiisse/user-service:latest
+    pull_policy: always
+    ports:
+      - "35045:35045"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieUserService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+
+  review-service:
+    container_name: review-service
+    image: abdullahiisse/review-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieReviewService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+  grocery-stores-service:
+    container_name: grocery-stores-service
+    image: abdullahiisse/grocery-stores-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieGroceryStoresService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+  follower-service:
+    container_name: follower-service
+    image: abdullahiisse/follower-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieFollowerService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+  favorite-dish-service:
+    container_name: favorite-dish-service
+    image: abdullahiisse/favorite-dish-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieFavoriteDishService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+  dish-service:
+    container_name: dish-service
+    image: abdullahiisse/dish-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieDishService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+
+
+  calendar-service:
+    container_name: calendar-service
+    image: abdullahiisse/calendar-service:latest
+    pull_policy: always
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieCalendarService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
