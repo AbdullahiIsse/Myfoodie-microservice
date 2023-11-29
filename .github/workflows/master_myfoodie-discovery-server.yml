@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8eeac65c802d41688f8b83a1d31d9b0c }}/discovery-server:${{ github.sha | lower }}
+        tags: myfoodiediscoveryserver.azurecr.io/discovery-server:latest
         file: ./discovery-server/Dockerfile
 
   deploy:
