@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://myfoodiediscoveryserver.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_5c86b198388146f4a181143e9e50bf8d }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_4deb700620c449e58b2e84a9e524259f }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_1f1f5361d503439ba761c1f171476795 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_a04837a3716f4a73915fbb29b064ca32 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5c86b198388146f4a181143e9e50bf8d }}/myfoodieDiscoveryServer/discovery-server:${{ github.sha }}
+        tags: myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1f1f5361d503439ba761c1f171476795 }}/discoveryserver:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'myfoodie-discovery-server'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2ccb764e8a144b39ba385bbb0e857257 }}
-        images: 'myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5c86b198388146f4a181143e9e50bf8d }}/myfoodieDiscoveryServer/discovery-server:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cab91acb1ab74bd69e553034f26119e4 }}
+        images: 'myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_1f1f5361d503439ba761c1f171476795 }}/discoveryserver:${{ github.sha }}'
