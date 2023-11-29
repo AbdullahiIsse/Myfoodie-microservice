@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiediscoveryserver.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8eeac65c802d41688f8b83a1d31d9b0c }}/discovery-server:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./discovery-server/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
