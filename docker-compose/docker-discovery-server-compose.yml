@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  discovery-server:
+    image: abdullahiisse/discovery-server:latest
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      - management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans

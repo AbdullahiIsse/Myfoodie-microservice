@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  user-service:
+    container_name: user-service
+    image: abdullahiisse/user-service:latest
+    pull_policy: always
+    ports:
+      - "8281:8081"
+    expose:
+      - "8081"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=https://eureka:password@myfoodie-discovery-server.azurewebsites.net/eureka/
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieUserService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans

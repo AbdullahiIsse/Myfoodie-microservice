@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  calendar-service:
+    container_name: calendar-service
+    image: abdullahiisse/calendar-service:latest
+    pull_policy: always
+    ports:
+      - "8286:8087"
+    expose:
+      - "8087"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=https://eureka:password@myfoodie-discovery-server.azurewebsites.net/eureka/
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieCalendarService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans

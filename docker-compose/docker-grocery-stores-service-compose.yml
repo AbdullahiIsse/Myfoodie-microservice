@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  grocery-stores-service:
+    container_name: grocery-stores-service
+    image: abdullahiisse/grocery-stores-service:latest
+    pull_policy: always
+    ports:
+      - "8282:8083"
+    expose:
+      - "8083"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=https://eureka:password@myfoodie-discovery-server.azurewebsites.net/eureka/
+      - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieGroceryStoresService
+      - spring.datasource.username=myfoodie@myfoodiedb
+      - spring.datasource.password=Password!
+      - management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans

@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  api-gateway:
+    image: abdullahiisse/api-gateway:latest
+    container_name: api-gateway
+    pull_policy: always
+    ports:
+      - "8181:8181"
+    expose:
+      - "8181"
+    environment:
+      - spring.security.oauth2.resourceserver.jwt.issuer-uri=https://myfoodie-keycloak.azurewebsites.net/auth/realms/myfoodie-microservice
+      - eureka.client.serviceUrl.defaultZone=https://eureka:password@myfoodie-discovery-server.azurewebsites.net/eureka/
+      - management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans
