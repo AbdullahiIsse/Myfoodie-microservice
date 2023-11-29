@@ -1,7 +1,7 @@
 FROM maven:3.8.1-openjdk-17 AS build
 MAINTAINER Abdullahi Isse "abdullahi12351@gmail.com"
 WORKDIR /app
-COPY pom.xml .
+COPY /discovery-server/pom.xml .
 RUN mvn dependency:go-offline
 COPY discovery-server/src/ /app/src/
 RUN mvn clean test
