@@ -3,7 +3,7 @@ MAINTAINER Abdullahi Isse "abdullahi12351@gmail.com"
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
-COPY src/ /app/src/
+COPY discovery-server/src/ /app/src/
 RUN mvn clean test
 RUN mvn package
 
