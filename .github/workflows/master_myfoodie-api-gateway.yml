@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodieapigateway.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_6af1c3644d2c4b4081e3b4528f1bf0ce }}/apigateway:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./api-gateway/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
