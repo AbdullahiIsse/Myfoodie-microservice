@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiedishservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_80c0a35aa358490085a1daafb1fa885b }}/dishservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./dish-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
