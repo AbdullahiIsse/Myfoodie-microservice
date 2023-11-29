@@ -20,6 +20,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="fdgfdfg" target="17" />
+      <module name="myfoodie-microservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
