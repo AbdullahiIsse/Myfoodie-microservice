@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiecalendarservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_6b9fda3d44d1401793c64f1c2e622a7b }}/calendarservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./calendar-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
