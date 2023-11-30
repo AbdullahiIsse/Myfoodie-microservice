@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiereviewservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_879fee81b65f433d83879771727f5a74 }}/reviewservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./review-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
