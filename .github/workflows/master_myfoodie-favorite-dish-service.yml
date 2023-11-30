@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiefavoritedishservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_bcc54fb30a0f4561b975ffbbcdd38d3e }}/favoritedishservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./favorite-dish-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
