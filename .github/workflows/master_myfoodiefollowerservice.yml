@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodiefollowerservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_f5989abd17d0446fa1fa838e63447d6a }}/followerservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./follower-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
