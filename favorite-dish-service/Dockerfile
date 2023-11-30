@@ -12,7 +12,7 @@ WORKDIR /usr/local/bin/
 COPY --from=build /app/target/favorite-dish-service-0.0.1-SNAPSHOT.jar .
 ENV eureka.client.serviceUrl.defaultZone=https://eureka:password@myfoodie-discovery-server.azurewebsites.net/eureka/
 ENV spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieFavoriteDishService
-ENV spring.datasource.username=myfoodie@myfoodiedb
+ENV spring.datasource.username=myfoodie
 ENV spring.datasource.password=Password!
 ENV management.zipkin.tracing.endpoint=https://myfoodie-zipkin.azurewebsites.net/zipkin/api/v2/spans
 
