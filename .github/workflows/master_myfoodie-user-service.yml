@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: myfoodieuserservice.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_39e1e19b759049ab9b69ed4ae54ee6f7 }}/userservice:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./user-service/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
