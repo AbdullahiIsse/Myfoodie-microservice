@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "USER-SERVICE",url = "https://myfoodie-user-service.azurewebsites.net")
+@FeignClient("USER-SERVICE")
 public interface UserServiceClient {
     @GetMapping("/api/user/{id}")
     UserResponse getUserById(@PathVariable("id") String id);

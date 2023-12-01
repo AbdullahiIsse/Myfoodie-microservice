@@ -13,14 +13,13 @@
         <module name="dish-service" />
         <module name="api-gateway" />
         <module name="calendar-service" />
+        <module name="grocery-stores-service" />
         <module name="user-service" />
         <module name="follower-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="fdgfdfg" target="17" />
-      <module name="grocery-stores-service" target="17" />
-      <module name="myfoodie-microservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

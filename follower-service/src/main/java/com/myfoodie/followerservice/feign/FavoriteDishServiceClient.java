@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "FAVORITE-DISH-SERVICE",url = "https://myfoodie-favorite-dish-service.azurewebsites.net")
+@FeignClient("FAVORITE-DISH-SERVICE")
 public interface FavoriteDishServiceClient {
     @GetMapping("/api/favorite/{id}")
    List<FavoriteDishResponse> getFavoriteDishesByUserId(@PathVariable String id);

@@ -1,20 +1,22 @@
 version: '3.1'
 
 services:
+
+  ## Keycloak Config with Mysql database
   keycloak-postgresql:
-    container_name: keycloak-postgresql
-    image: postgres
-    volumes:
-      - keycloak-postgresql-data:/data/postgres
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 42323087
+   container_name: keycloak-postgresql
+   image: postgres
+   volumes:
+    - ./postgresql_keycloak_data:/data/postgres
+   environment:
+    POSTGRES_DB: keycloak
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: 42323087
 
   keycloak:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:22.0.5
-    command: ["start-dev", "--import-realm"]
+    command: [ "start-dev", "--import-realm" ]
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: keycloak-postgresql
@@ -30,43 +32,51 @@ services:
     depends_on:
       - keycloak-postgresql
 
+  ## Zipkin
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
     ports:
       - "9411:9411"
 
+      ## Eureka Server
   discovery-server:
     image: abdullahiisse/discovery-server:latest
     container_name: discovery-server
     ports:
       - "8761:8761"
+
     environment:
       - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
     depends_on:
       - zipkin
 
+  ## Api-gateway
   api-gateway:
-    image: abdullahiisse/api-gateway:latest
-    container_name: api-gateway
-    pull_policy: always
-    ports:
-      - "8181:8181"
-    expose:
-      - "8181"
-    environment:
-      - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://keycloak:8080/realms/spring-boot-myfoodie-microservice-realm
-      - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
-      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
-    depends_on:
-      - zipkin
-      - discovery-server
-      - keycloak
+   image: abdullahiisse/api-gateway:latest
+   container_name: api-gateway
+   pull_policy: always
+   ports:
+     - "8181:8181"
+   expose:
+     - "8181"
+   environment:
+     - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://keycloak:8080/realms/spring-boot-myfoodie-microservice-realm
+     - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
+     - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+
+   depends_on:
+     - zipkin
+     - discovery-server
+     - keycloak
+
 
   user-service:
     container_name: user-service
     image: abdullahiisse/user-service:latest
     pull_policy: always
+    ports:
+      - "35045:35045"
     environment:
       - eureka.client.serviceUrl.defaultZone=http://eureka:password@discovery-server:8761/eureka
       - spring.datasource.url=jdbc:postgresql://myfoodiedb.postgres.database.azure.com:5432/MyFoodieUserService
@@ -77,6 +87,8 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
+
+
 
   review-service:
     container_name: review-service
@@ -93,6 +105,7 @@ services:
       - discovery-server
       - api-gateway
 
+
   grocery-stores-service:
     container_name: grocery-stores-service
     image: abdullahiisse/grocery-stores-service:latest
@@ -107,6 +120,7 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
+
 
   follower-service:
     container_name: follower-service
@@ -123,6 +137,7 @@ services:
       - discovery-server
       - api-gateway
 
+
   favorite-dish-service:
     container_name: favorite-dish-service
     image: abdullahiisse/favorite-dish-service:latest
@@ -137,6 +152,7 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
+
 
   dish-service:
     container_name: dish-service
@@ -153,6 +169,7 @@ services:
       - discovery-server
       - api-gateway
 
+
   calendar-service:
     container_name: calendar-service
     image: abdullahiisse/calendar-service:latest
@@ -167,6 +184,3 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
-
-volumes:
-  keycloak-postgresql-data:

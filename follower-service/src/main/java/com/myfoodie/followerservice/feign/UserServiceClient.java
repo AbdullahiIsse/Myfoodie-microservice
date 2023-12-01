@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "USER-SERVICE",configuration = CustomFeignConfiguration.class,url = "https://myfoodie-user-service.azurewebsites.net")
+@FeignClient(name = "USER-SERVICE",configuration = CustomFeignConfiguration.class)
 public interface UserServiceClient {
     @GetMapping("/api/user/exist/{userId}")
     boolean checkIfUserExists(@PathVariable("userId") String userId);
