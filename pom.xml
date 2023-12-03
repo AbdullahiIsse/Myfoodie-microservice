@@ -18,7 +18,7 @@
     <modules>
         <module>user-service</module>
         <module>review-service</module>
-        <module>grocery-stores-service</module>
+        <module>category-service</module>
         <module>follower-service</module>
         <module>favorite-dish-service</module>
         <module>dish-service</module>

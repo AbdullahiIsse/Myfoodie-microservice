@@ -1,12 +1,11 @@
-package com.myfoodie.dishservice.dto;
+package com.myfoodie.categoryservice.dto;
 
-import com.myfoodie.dishservice.model.MealType;
+import com.myfoodie.categoryservice.model.MealType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DishResponse {
-    private long id;
     private String name;
     private String description;
     private List<String> ingredients;

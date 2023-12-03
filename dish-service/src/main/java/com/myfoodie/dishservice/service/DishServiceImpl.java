@@ -137,6 +137,7 @@ public class DishServiceImpl implements DishService {
 
     private DishResponse mapToDishResponse(Dish dish) {
         return DishResponse.builder()
+                .id(dish.getId())
                 .name(dish.getName())
                 .description(dish.getDescription())
                 .ingredients(dish.getIngredients())
