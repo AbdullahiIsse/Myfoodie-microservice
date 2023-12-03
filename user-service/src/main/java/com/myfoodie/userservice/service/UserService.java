@@ -19,5 +19,7 @@ public interface UserService {
 
     boolean checkIfUserExists (String userId);
 
+    boolean checkIfUserExistByEmail (String email);
+
 
 }

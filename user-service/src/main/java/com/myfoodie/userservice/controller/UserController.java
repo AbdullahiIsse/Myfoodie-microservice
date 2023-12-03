@@ -48,4 +48,10 @@ public class UserController {
     public boolean checkIfUserExists(@PathVariable("userId") String userId) {
         return userService.checkIfUserExists(userId);
     }
+
+    @GetMapping("/exist/email/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean checkIfUserExistByEmail(@PathVariable("email") String email) {
+        return userService.checkIfUserExistByEmail(email);
+    }
 }

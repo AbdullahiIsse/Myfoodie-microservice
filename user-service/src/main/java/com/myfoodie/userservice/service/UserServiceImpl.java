@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.existsUserById(userId);
     }
 
+    @Override
+    public boolean checkIfUserExistByEmail(String email) {
+        return userRepository.existsUserByEmail(email);
+    }
+
 
     private UserResponse mapToUserResponse(User user){
         return UserResponse.builder()
