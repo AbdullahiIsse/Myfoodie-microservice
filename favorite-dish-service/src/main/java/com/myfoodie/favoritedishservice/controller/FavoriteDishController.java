@@ -59,6 +59,15 @@ public class FavoriteDishController {
         return favoriteDishService.getFavoriteDishesAddedBetweenDates(id, StartDate, EndDate);
     }
 
+    @GetMapping("/dish/{userId}/{dishId}")
+    @ResponseStatus(HttpStatus.OK)
+    public FavoriteDishResponse getFavoriteDishByUserIdAndDishId(
+            @PathVariable String userId,
+            @PathVariable Long dishId
+    ) {
+        return favoriteDishService.getFavoriteDishByUserIdAndDishId(userId,dishId);
+    }
+
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeAllDishFromUser(@PathVariable String userId) {

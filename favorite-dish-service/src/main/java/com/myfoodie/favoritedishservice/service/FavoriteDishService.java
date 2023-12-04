@@ -18,6 +18,7 @@ public interface FavoriteDishService {
 
     List<FavoriteDishResponse> getFavoriteDishesAddedBetweenDates(String userId, LocalDate startDate, LocalDate endDate);
 
+    FavoriteDishResponse getFavoriteDishByUserIdAndDishId(String userId, long dishId);
     void removeAllFavoriteDishesForUser(String userId);
 
 

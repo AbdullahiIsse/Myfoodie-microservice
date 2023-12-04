@@ -65,6 +65,26 @@ public class FavoriteDishServiceImpl implements FavoriteDishService {
     }
 
     @Override
+    public FavoriteDishResponse getFavoriteDishByUserIdAndDishId(String userId, long dishId) {
+        FavoriteDish favoriteDish = favoriteDishRepository.findByUserIdAndDishId(userId, dishId);
+
+        if (favoriteDish == null) {
+            log.warn("FavoriteDish with userId {} and dishId {} not found", userId, dishId);
+            return null;
+        }
+
+        List<DishResponse> dishResponseList = dishServiceClient.getDishByIds(List.of(dishId));
+
+        if (dishResponseList.isEmpty()) {
+            log.warn("Dish with dishId {} not found", dishId);
+            return null;
+        }
+
+        DishResponse dishResponse = dishResponseList.get(0);
+        return mapToFavoriteDishResponse(dishId, favoriteDish, dishResponse);
+    }
+
+    @Override
     @Transactional
     public void removeAllFavoriteDishesForUser(String userId) {
         favoriteDishRepository.removeAllByUserId(userId);
