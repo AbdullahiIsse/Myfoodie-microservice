@@ -42,7 +42,7 @@ public class Dish {
 
     @NotBlank(message = "Recipe is required")
     @Column(name = "recipe", nullable = false)
-    private String recipe;
+    private List<String> recipe;
 
     @NotBlank(message = "ImageURL is required")
     @Size(max = 255, message = "ImageURL cannot exceed 255 characters")

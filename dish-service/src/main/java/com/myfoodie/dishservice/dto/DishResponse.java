@@ -18,7 +18,7 @@ public class DishResponse {
     private String name;
     private String description;
     private List<String> ingredients;
-    private String recipe;
+    private List<String> recipe;
     private String imageURL;
     private Integer timeEstimate;
     private List<String> nutritionalContent;
