@@ -3,6 +3,8 @@ package com.myfoodie.calendarservice.repository;
 import com.myfoodie.calendarservice.model.Calendar;
 import org.springframework.data.repository.CrudRepository;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CalendarRepository extends CrudRepository<Calendar,Long> {
@@ -11,5 +13,9 @@ public interface CalendarRepository extends CrudRepository<Calendar,Long> {
 
     void deleteByUserIdAndDishId (String UserId, long dishId);
 
-    List<Calendar>findAllByUserId (String userId);
+    List<Calendar>findAllByUserIdAndDate (String userId, Date date);
+
+
+
+
 }

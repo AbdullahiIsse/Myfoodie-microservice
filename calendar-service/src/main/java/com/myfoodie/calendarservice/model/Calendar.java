@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity(name = "calendar")
@@ -33,7 +34,7 @@ public class Calendar {
 
     @Column(name = "date")
     @NotNull(message = "date is required")
-    private LocalDateTime date;
+    private Date date;
 
 
 }

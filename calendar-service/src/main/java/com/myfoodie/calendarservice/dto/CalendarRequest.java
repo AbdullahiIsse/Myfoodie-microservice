@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 
@@ -16,6 +17,6 @@ public class CalendarRequest {
 
     private String userId;
     private long dishId;
-    private LocalDateTime date;
+    private Date date;
 
 }

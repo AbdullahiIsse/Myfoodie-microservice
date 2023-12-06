@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -69,8 +71,8 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<CalendarResponse> getCalendarEntriesByUserId(String userId) {
-        var calendars = calendarRepository.findAllByUserId(userId);
+    public List<CalendarResponse> getCalendarEntriesByUserIdAndDate(String userId, Date date) {
+        var calendars = calendarRepository.findAllByUserIdAndDate(userId,date);
         return calendars.stream()
                 .map(calendar -> {
                     var dish = dishServiceClient.getDishesById(calendar.getDishId());

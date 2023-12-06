@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -34,10 +36,10 @@ public class CalendarController {
         calendarService.deleteCalendar(userId, dishId);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId}/{date}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CalendarResponse> getCalendarEntriesByUserId(@PathVariable String userId) {
-        return calendarService.getCalendarEntriesByUserId(userId);
+    public List<CalendarResponse> getCalendarEntriesByUserIdAndDate(@PathVariable String userId, @PathVariable Date date) {
+        return calendarService.getCalendarEntriesByUserIdAndDate(userId, date);
     }
 
 

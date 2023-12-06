@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CalendarResponse {
 
     private String userId;
     private long dishId;
-    private LocalDateTime date;
+    private Date date;
     private String name;
     private String description;
     private List<String> ingredients;

@@ -4,6 +4,8 @@ import com.myfoodie.calendarservice.dto.CalendarRequest;
 import com.myfoodie.calendarservice.dto.CalendarResponse;
 import jakarta.validation.Valid;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CalendarService {
@@ -17,6 +19,6 @@ public interface CalendarService {
     void deleteCalendar(String  userId,long dishId);
 
 
-    List<CalendarResponse> getCalendarEntriesByUserId(String userId);
+    List<CalendarResponse> getCalendarEntriesByUserIdAndDate(String userId, Date date);
 
 }
