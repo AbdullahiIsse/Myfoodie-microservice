@@ -65,5 +65,11 @@ public class DishController {
         return dishService.getDishById(id);
     }
 
+    @GetMapping("/newlyAdded")
+    @ResponseStatus(HttpStatus.OK)
+    public List<DishResponse> getNewlyAddedDishes() {
+        return dishService.getTop10ByOrderByCreatedAtDesc();
+    }
+
 
 }

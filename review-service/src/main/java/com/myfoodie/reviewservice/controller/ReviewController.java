@@ -1,5 +1,6 @@
 package com.myfoodie.reviewservice.controller;
 
+import com.myfoodie.reviewservice.dto.ReviewDishResponse;
 import com.myfoodie.reviewservice.dto.ReviewRequest;
 import com.myfoodie.reviewservice.dto.ReviewResponse;
 import com.myfoodie.reviewservice.exception.ReviewNotFoundException;
@@ -61,6 +62,25 @@ public class ReviewController {
     @ResponseStatus(HttpStatus.OK)
     public List<ReviewResponse> getLatestReviewsByDishId(@PathVariable Long dishId) {
         return reviewService.getLatestReviewsByDishId(dishId);
+    }
+
+
+    @GetMapping("/user/{userId}/{dishId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReviewResponse> getReviewsByUserAndDishId(@PathVariable String userId,@PathVariable Long dishId) {
+        return reviewService.getReviewsByUserIdAndDishId(userId,dishId);
+    }
+
+    @GetMapping("/most-reviewed-dishes")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReviewDishResponse> getDishesWithMostReviews() {
+        return reviewService.getDishesWithMostReviews();
+    }
+
+    @GetMapping("/highest-rated-dishes")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReviewDishResponse> getDishesWithHighestRating() {
+        return reviewService.getDishesWithHighestRating();
     }
 
 

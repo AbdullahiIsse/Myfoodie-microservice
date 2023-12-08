@@ -135,6 +135,13 @@ public class DishServiceImpl implements DishService {
         return mapToDishResponse(dish);
     }
 
+    @Override
+    public List<DishResponse> getTop10ByOrderByCreatedAtDesc() {
+        return dishRepository.findTop10ByOrderByCreatedAtDesc().stream()
+                .map(this::mapToDishResponse)
+                .toList();
+    }
+
     private DishResponse mapToDishResponse(Dish dish) {
         return DishResponse.builder()
                 .id(dish.getId())

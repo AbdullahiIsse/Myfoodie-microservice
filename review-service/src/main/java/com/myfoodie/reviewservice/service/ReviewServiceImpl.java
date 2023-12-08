@@ -1,9 +1,11 @@
 package com.myfoodie.reviewservice.service;
 
+import com.myfoodie.reviewservice.dto.DishResponse;
 import com.myfoodie.reviewservice.dto.ReviewDishResponse;
 import com.myfoodie.reviewservice.dto.ReviewRequest;
 import com.myfoodie.reviewservice.dto.ReviewResponse;
 import com.myfoodie.reviewservice.exception.ReviewNotFoundException;
+import com.myfoodie.reviewservice.feign.DishServiceClient;
 import com.myfoodie.reviewservice.feign.UserServiceClient;
 import com.myfoodie.reviewservice.model.Review;
 import com.myfoodie.reviewservice.repository.ReviewRepository;
@@ -25,6 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final UserServiceClient userServiceClient;
+    private final DishServiceClient dishServiceClient;
 
     @Override
     @Transactional
@@ -116,6 +119,29 @@ public class ReviewServiceImpl implements ReviewService {
                 .toList();
     }
 
+    @Override
+    public List<ReviewResponse> getReviewsByUserIdAndDishId(String userId, long dishId) {
+        var reviewsByUserAndDish = reviewRepository.findReviewsByUserIdAndDishId(userId,dishId);
+
+        return reviewsByUserAndDish.stream()
+                .map(this::mapToReviewResponse)
+                .toList();
+    }
+
+    @Override
+    public List<ReviewDishResponse> getDishesWithMostReviews() {
+        List<Object[]> result = reviewRepository.findDishesWithMostReviews();
+
+        return mapToReviewDishResponseList(result);
+    }
+
+    @Override
+    public List<ReviewDishResponse> getDishesWithHighestRating() {
+        List<Object[]> result = reviewRepository.findDishesWithHighestRating();
+
+        return mapToReviewDishResponseList(result);
+    }
+
 
     private ReviewResponse mapToReviewResponse(Review review){
         return ReviewResponse.builder()
@@ -130,5 +156,24 @@ public class ReviewServiceImpl implements ReviewService {
                 .build();
     }
 
+    private List<ReviewDishResponse> mapToReviewDishResponseList(List<Object[]> result) {
+        return result.stream()
+                .map(array -> {
+                    long dishId = (long) array[0];
+                    DishResponse dishResponse = dishServiceClient.getDishesById(dishId);
+                    return ReviewDishResponse.builder()
+                            .dishId(dishId)
+                            .name(dishResponse.getName())
+                            .description(dishResponse.getDescription())
+                            .ingredients(dishResponse.getIngredients())
+                            .recipe(dishResponse.getRecipe())
+                            .imageURL(dishResponse.getImageURL())
+                            .timeEstimate(dishResponse.getTimeEstimate())
+                            .nutritionalContent(dishResponse.getNutritionalContent())
+                            .mealType(dishResponse.getMealType())
+                            .build();
+                })
+                .toList();
+    }
 
 }

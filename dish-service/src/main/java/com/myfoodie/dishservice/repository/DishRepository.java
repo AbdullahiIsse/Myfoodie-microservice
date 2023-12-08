@@ -13,4 +13,6 @@ public interface DishRepository extends CrudRepository<Dish,Long> {
     List<Dish> findDishByIdIn(List<Long> id);
 
     Dish findDishById(long id);
+
+    List<Dish>findTop10ByOrderByCreatedAtDesc();
 }

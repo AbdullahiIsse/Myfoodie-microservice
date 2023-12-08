@@ -3,6 +3,7 @@ package com.myfoodie.reviewservice.service;
 import com.myfoodie.reviewservice.dto.ReviewDishResponse;
 import com.myfoodie.reviewservice.dto.ReviewRequest;
 import com.myfoodie.reviewservice.dto.ReviewResponse;
+import com.myfoodie.reviewservice.model.Review;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -21,7 +22,9 @@ public interface ReviewService {
 
     List<ReviewResponse> getLatestReviewsByDishId(long dishId);
 
+    List<ReviewResponse>getReviewsByUserIdAndDishId(String userId, long dishId);
 
-
+    List<ReviewDishResponse> getDishesWithMostReviews();
+    List<ReviewDishResponse> getDishesWithHighestRating();
 
 }
