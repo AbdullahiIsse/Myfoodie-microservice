@@ -77,6 +77,7 @@ public class CalendarServiceImpl implements CalendarService {
                 .map(calendar -> {
                     var dish = dishServiceClient.getDishesById(calendar.getDishId());
                     return CalendarResponse.builder()
+                            .id(calendar.getId())
                             .userId(calendar.getUserId())
                             .dishId(calendar.getDishId())
                             .date(calendar.getDate())

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalendarResponse {
-
+    private long id;
     private String userId;
     private long dishId;
     private Date date;
