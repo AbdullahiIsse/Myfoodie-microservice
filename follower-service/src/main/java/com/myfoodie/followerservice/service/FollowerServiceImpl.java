@@ -33,11 +33,13 @@ public class FollowerServiceImpl implements FollowerService {
         return followers.stream()
                 .map(follower -> {
                     List<FavoriteDishResponse> favoriteDishes = favoriteDishServiceClient.getFavoriteDishesByUserId(follower.getUserId());
+                    var user = userServiceClient.getUserById(follower.getUserId());
 
                     return FollowerResponse.builder()
                             .followerId(follower.getFollowerId())
                             .userId(follower.getUserId())
                             .followedDate(follower.getFollowedDate())
+                            .username(user.getUsername())
                             .favoriteDishResponses(favoriteDishes)
                             .build();
                 })
@@ -90,5 +92,24 @@ public class FollowerServiceImpl implements FollowerService {
             followerRepository.deleteByFollowerIdAndUserId(followedId, userId);
             log.info("User id {} is no longer following user id {}", userId, followedId);
         }
+    }
+
+    @Override
+    public List<FollowerResponse> getFollowersFavoriteDishList(String userId) {
+        List<Follower> followersThatFollow = followerRepository.findAllByUserId(userId);
+
+        return followersThatFollow.stream()
+                .map(follower -> {
+                    List<FavoriteDishResponse> favoriteDishes = favoriteDishServiceClient.getFavoriteDishesByUserId(follower.getUserId());
+                    var user = userServiceClient.getUserById(follower.getFollowerId());
+                    return FollowerResponse.builder()
+                            .followerId(follower.getFollowerId())
+                            .userId(follower.getUserId())
+                            .followedDate(follower.getFollowedDate())
+                            .username(user.getUsername())
+                            .favoriteDishResponses(favoriteDishes)
+                            .build();
+                })
+                .toList();
     }
 }

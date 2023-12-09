@@ -18,6 +18,7 @@ public class FollowerResponse {
     private String followerId;
     private String userId;
     private LocalDateTime followedDate;
+    private String username;
     private List<FavoriteDishResponse> favoriteDishResponses;
 
 }

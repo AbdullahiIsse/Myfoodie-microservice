@@ -12,6 +12,8 @@ public interface FollowerRepository extends CrudRepository<Follower,Long> {
 
     boolean existsByFollowerIdAndUserId (String followerId,String userId);
 
+    List<Follower> findAllByUserId(String userId);
+
 
 
 

@@ -13,4 +13,6 @@ public interface FollowerService {
 
     void deleteFollowerByIds(String followedId,String userId);
 
+    List<FollowerResponse> getFollowersFavoriteDishList(String userId);
+
 }

@@ -30,6 +30,7 @@ public class FollowerController {
     @GetMapping("/{followerId}")
     public ResponseEntity<List<FollowerResponse>> getFollowerFavoriteDishList(@PathVariable String followerId) {
         List<FollowerResponse> followers = followerService.getFollowerFavoriteDishList(followerId);
+        System.out.println("test, " + followers.size());
         return new ResponseEntity<>(followers, HttpStatus.OK);
     }
 
@@ -41,6 +42,24 @@ public class FollowerController {
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to delete follower: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<FollowerResponse>> getFollowersFavoriteDishList(@PathVariable String userId) {
+        List<FollowerResponse> followers = followerService.getFollowersFavoriteDishList(userId);
+        return new ResponseEntity<>(followers, HttpStatus.OK);
+    }
+
+    @GetMapping("/followingCount/{userId}")
+    public long getFollowerCount(@PathVariable String userId) {
+        List<FollowerResponse> following = followerService.getFollowerFavoriteDishList(userId);
+        return following.size();
+    }
+
+    @GetMapping("/followersCount/{userId}")
+    public long getFollowersCount(@PathVariable String userId) {
+        List<FollowerResponse> followers = followerService.getFollowersFavoriteDishList(userId);
+        return followers.size();
     }
 
 }
