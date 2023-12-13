@@ -8,7 +8,9 @@ import com.myfoodie.categoryservice.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,15 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDishResponse> getCategoriesById(long id) {
         var categoriesById = categoryRepository.findAllById(id);
-        return categoriesById
-                .stream()
-                .map(category ->
-                        {
-                            var dish = dishServiceClient.getDishesById(category.getDishId());
+        return categoriesById.stream()
+                .flatMap(category ->
+                        category.getDishId().stream().map(dishId -> {
+                            var dish = dishServiceClient.getDishesById(dishId);
                             return CategoryDishResponse.builder()
                                     .id(category.getId())
                                     .title(category.getTitle())
-                                    .dishId(category.getDishId())
+                                    .dishId(Collections.singletonList(dishId))
                                     .name(dish.getName())
                                     .description(dish.getDescription())
                                     .ingredients(dish.getIngredients())
@@ -47,10 +48,11 @@ public class CategoryServiceImpl implements CategoryService {
                                     .nutritionalContent(dish.getNutritionalContent())
                                     .mealType(dish.getMealType())
                                     .build();
-                        }
+                        })
                 )
-                .toList();
+                .collect(Collectors.toList());
     }
+
 
 
     private CategoryResponse mapToCategoryResponse(Category category) {

@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity(name = "category")
 @Builder
@@ -28,6 +30,6 @@ public class Category {
 
     @Column(name = "dish_id")
     @NotNull(message = "dish_id is required")
-    private long dishId;
+    private List<Long> dishId;
 
 }

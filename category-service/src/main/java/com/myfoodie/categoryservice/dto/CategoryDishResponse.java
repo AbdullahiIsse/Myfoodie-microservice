@@ -15,7 +15,7 @@ import java.util.List;
 public class CategoryDishResponse {
     private long id;
     private String title;
-    private long dishId;
+    private List<Long> dishId;
     private String name;
     private String description;
     private List<String> ingredients;
